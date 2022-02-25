@@ -9,7 +9,7 @@ install_yay() {
 }
 
 install_aur_packages() {
-    yay --noconfirm -Syyuu - < /packages.aur > /dev/null
+    yay --noconfirm -Syyuu picom-jonaburg-git > /dev/null
 }
 
 
