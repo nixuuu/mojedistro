@@ -2,6 +2,7 @@
 
 IS_EFI="no"
 INSTALL_DISK="$1"
+SCRIPT_URI="https://raw.githubusercontent.com/nixuuu/mojedistro/main"
 
 verify_boot_mode() {
     ls /sys/firmware/efi/efivars > /dev/null
@@ -105,8 +106,8 @@ mount_disk() {
 
 install_packages() {
     _msg "INSTALL PACKAGES"
-    curl https://nixcode.it/packages.x86_64 --output /mnt/packages.x86_64 -s
-    curl https://nixcode.it/packages.aur --output /mnt/packages.aur -s
+    curl "${SCRIPT_URI}/packages.x86_64" --output /mnt/packages.x86_64 -s
+    curl "${SCRIPT_URI}/packages.aur" --output /mnt/packages.aur -s
     pacstrap /mnt base linux linux-firmware grub efibootmgr vim networkmanager git base-devel > /dev/null
     echo "[OK]"
 }
@@ -119,7 +120,7 @@ setup_fstab() {
 
 run_chroot() {
     _msg "CHROOT"
-    curl https://nixcode.it/chroot.sh --output /mnt/chroot.sh -s
+    curl "${SCRIPT_URI}/chroot.sh" --output /mnt/chroot.sh -s
     chmod +x /mnt/chroot.sh
     arch-chroot /mnt /bin/bash -c /chroot.sh
     _error_msg "FINISHED"

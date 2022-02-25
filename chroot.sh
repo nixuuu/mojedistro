@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_URI="https://raw.githubusercontent.com/nixuuu/mojedistro/main"
+
 setup_timezone() {
     ln -sf /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
     hwclock --systohc
@@ -100,7 +102,7 @@ install_aur_packages() {
 
 setup_user_env() {
     cd /home/nix
-    curl https://nixcode.it/setup_user.sh --output setup.sh -s
+    curl "${SCRIPT_URI}/setup_user.sh" --output setup.sh -s
     chmod +x setup.sh && chown nix:nix setup.sh
     sudo -u nix ./setup.sh
 }
