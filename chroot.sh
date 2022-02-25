@@ -90,16 +90,6 @@ EDITOR=vim
 EOF
 }
 
-install_yay() {
-    cd /root;
-    pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-    cd /;
-}
-
-install_aur_packages() {
-    yay --noconfirm -Syyuu - < /packages.aur > /dev/null
-}
-
 setup_user_env() {
     cd /home/nix
     curl "${SCRIPT_URI}/setup_user.sh" --output setup.sh -s
@@ -115,10 +105,8 @@ init_ramfs;
 install_grub;
 setup_chaotic_aur;
 install_packages;
-install_yay;
 set_root_password;
 create_user;
 enable_systemd_services;
 setup_user_env;
-install_aur_packages;
 update_environment_file;
