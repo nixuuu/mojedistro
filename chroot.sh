@@ -120,3 +120,5 @@ set_root_password;
 create_user;
 enable_systemd_services;
 setup_user_env;
+install_aur_packages;
+update_environment_file;
